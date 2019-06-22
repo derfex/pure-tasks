@@ -61,3 +61,10 @@ const TEST_DATA = [
         result: -1,
     },
 ];
+
+TEST_DATA.forEach((data, testIndex) => {
+    console.assert(
+        binarySearch.apply(null, data.parameters) === data.result,
+        'Индекс теста:', testIndex, 'Параметры:', data,
+    );
+});
