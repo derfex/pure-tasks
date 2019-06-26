@@ -44,7 +44,11 @@
         );
 
         // Применить визуальное состояние.
-        if (!report.moveIsCorrect) return;
+        if (!report.moveIsCorrect) {
+            // Сместить указатель обратно, на предыдущего игрока.
+            playerList.revert();
+            return;
+        }
         elementTD.style.backgroundColor = player.COLOR;
         elementTD.style.cursor = 'not-allowed';
 

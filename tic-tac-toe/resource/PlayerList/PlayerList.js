@@ -18,7 +18,7 @@
             this._currentPlayerIndex = this._LIMIT;
         };
 
-        // Создать пустую таблицу для хранения ходов и поиска победителя.
+        // Получить следующего игрока.
         PlayerList.prototype.getNext = function() {
             let index = this._currentPlayerIndex + 1;
             if (index > this._LIMIT) {
@@ -26,6 +26,15 @@
             }
             this._currentPlayerIndex = index;
             return this._DATA_PLAYERS[index];
+        };
+
+        // Вернуть предыдущее состояние.
+        PlayerList.prototype.revert = function() {
+            let index = this._currentPlayerIndex - 1;
+            if (index < 0) {
+                index = this._LIMIT;
+            }
+            this._currentPlayerIndex = index;
         };
 
         return PlayerList
