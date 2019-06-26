@@ -49,8 +49,7 @@
             playerList.revert();
             return;
         }
-        elementTD.style.backgroundColor = player.COLOR;
-        elementTD.style.cursor = 'not-allowed';
+        PlayingField.markCell(elementTD, player.COLOR);
 
         // Сообщить о победителе.
         if (report.hasWinner) {
