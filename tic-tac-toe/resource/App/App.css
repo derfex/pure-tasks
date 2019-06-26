@@ -9,3 +9,9 @@ body {
 h1 {
     font-family: sans-serif;
 }
+
+#js-app__start-again {
+    margin-top: 2em;
+    width: 170px;
+    padding: 5px;
+}

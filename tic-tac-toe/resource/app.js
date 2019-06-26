@@ -64,4 +64,10 @@
             reset();
         }
     });
+
+    // Кнопка «Начать заново».
+    const elementStartAgain = document.getElementById('js-app__start-again');
+    elementStartAgain.addEventListener('click', () => {
+        reset();
+    });
 })();
