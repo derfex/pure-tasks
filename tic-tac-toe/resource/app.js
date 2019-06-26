@@ -44,9 +44,12 @@
         );
 
         // Применить визуальное состояние.
-        if (!report.moveIsCorrect) return;
-        elementTD.style.backgroundColor = player.COLOR;
-        elementTD.style.cursor = 'not-allowed';
+        if (!report.moveIsCorrect) {
+            // Сместить указатель обратно, на предыдущего игрока.
+            playerList.revert();
+            return;
+        }
+        PlayingField.markCell(elementTD, player.COLOR);
 
         // Сообщить о победителе.
         if (report.hasWinner) {
