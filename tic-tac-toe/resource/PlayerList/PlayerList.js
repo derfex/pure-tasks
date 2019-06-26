@@ -18,7 +18,10 @@
             this._currentPlayerIndex = this._LIMIT;
         };
 
-        // Получить следующего игрока.
+        /**
+         * Получить следующего игрока.
+         * @returns {Object}
+         */
         PlayerList.prototype.getNext = function() {
             let index = this._currentPlayerIndex + 1;
             if (index > this._LIMIT) {
@@ -28,7 +31,9 @@
             return this._DATA_PLAYERS[index];
         };
 
-        // Вернуть предыдущее состояние.
+        /**
+         * Вернуть предыдущее состояние.
+         */
         PlayerList.prototype.revert = function() {
             let index = this._currentPlayerIndex - 1;
             if (index < 0) {
