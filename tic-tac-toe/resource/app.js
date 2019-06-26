@@ -18,6 +18,10 @@
     }];
     const PLAYERS_NAME = PLAYERS_DATA.map(player => player.NAME);
 
+    const reset = function reset() {
+        location.reload();
+    };
+
 
     // Менеджеры данных.
     const playerList = new PlayerList(PLAYERS_DATA);
@@ -48,7 +52,7 @@
         if (!report.hasWinner) return;
         const again = confirm('Победил игрок «' + report.winnerName + '»! Желаете начать заново?');
         if (again) {
-            location.reload();
+            reset();
         }
     });
 })();
