@@ -39,10 +39,11 @@
             }
             column[y] = player;
             this._lastPlayer = player;
+            ++this._count;
             return true;
         };
 
-        // Проверить был ли последний ход победным. В столбцах.
+        // Проверить, был ли последний ход победным. В столбцах.
         MemoryTable.prototype._checkColumns = function() {
             for (let x = 0; x < this._size; x++) {
                 for (let y = 0; y < this._size; y++) {
@@ -57,7 +58,7 @@
             return false;
         };
 
-        // Проверить был ли последний ход победным. В строках.
+        // Проверить, был ли последний ход победным. В строках.
         MemoryTable.prototype._checkRows = function() {
             for (let y = 0; y < this._size; y++) {
                 for (let x = 0; x < this._size; x++) {
@@ -72,7 +73,7 @@
             return false;
         };
 
-        // Проверить был ли последний ход победным. В диагоналях.
+        // Проверить, был ли последний ход победным. В диагоналях.
         MemoryTable.prototype._checkDiagonals = function() {
             let hasWinner = false;
             for (let i = 0; i < this._size; i++) {
@@ -101,6 +102,7 @@
             '_checkDiagonals',
         ];
 
+        // Проверить, был ли последний ход победным.
         MemoryTable.prototype._hasWinner = function() {
             for (let i = CHECK_LIST.length - 1; i > -1; --i) {
                 if (this[CHECK_LIST[i]]()) return true;
@@ -108,7 +110,18 @@
             return false;
         };
 
-        // Создать пустую таблицу для хранения ходов и поиска победителя.
+        // Проверить, завершена ли игра.
+        MemoryTable.prototype._gameIsOver = function() {
+            return this._count >= this._limit;
+        };
+
+        /**
+         * Сделать ход.
+         * @param player — имя игрока.
+         * @param x — координата `x`.
+         * @param y — координата `y`.
+         * @returns {object} — отчёт о состоянии игры после выполнения хода.
+         */
         MemoryTable.prototype.makeMove = function(player, x, y) {
             if (!~this._players.indexOf(player)) {
                 throw new Error('Неизвестный игрок.');
@@ -125,24 +138,25 @@
             if (report.hasWinner) {
                 report.winnerName = player;
             }
+            report.gameIsOver = this._gameIsOver();
             return report;
         };
 
-        // Создать пустую таблицу для хранения ходов и поиска победителя.
+        // Метод для отладки.
         MemoryTable.prototype.debug = function() {
             let toString = 'Визуальное представление:\r\n';
             for (let y = 0; y < this._size; y++) {
                 for (let x = 0; x < this._size; x++) {
-                    const value = this._matrix[x][y]
+                    const value = this._matrix[x][y];
                     toString += value === undefined
                         ? '_'
                         : value;
                 }
                 toString += '\r\n';
             }
-             return toString;
+            return toString;
         };
 
-        return MemoryTable
+        return MemoryTable;
     })();
 })();

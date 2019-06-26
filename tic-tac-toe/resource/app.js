@@ -18,6 +18,10 @@
     }];
     const PLAYERS_NAME = PLAYERS_DATA.map(player => player.NAME);
 
+    const reset = function reset() {
+        location.reload();
+    };
+
 
     // Менеджеры данных.
     const playerList = new PlayerList(PLAYERS_DATA);
@@ -45,10 +49,25 @@
         elementTD.style.cursor = 'not-allowed';
 
         // Сообщить о победителе.
-        if (!report.hasWinner) return;
-        const again = confirm('Победил игрок «' + report.winnerName + '»! Желаете начать заново?');
-        if (again) {
-            location.reload();
+        if (report.hasWinner) {
+            const again = confirm('Победил игрок «' + report.winnerName + '»! Желаете начать заново?');
+            if (again) {
+                reset();
+            }
+            return;
         }
+
+        // Проверить, завершена ли игра.
+        if (!report.gameIsOver) return;
+        const again = confirm('Игра окончена! Желаете начать заново?');
+        if (again) {
+            reset();
+        }
+    });
+
+    // Кнопка «Начать заново».
+    const elementStartAgain = document.getElementById('js-app__start-again');
+    elementStartAgain.addEventListener('click', () => {
+        reset();
     });
 })();
