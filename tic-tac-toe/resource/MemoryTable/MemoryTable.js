@@ -39,6 +39,7 @@
             }
             column[y] = player;
             this._lastPlayer = player;
+            ++this._count;
             return true;
         };
 
@@ -108,6 +109,10 @@
             return false;
         };
 
+        MemoryTable.prototype._gameIsOver = function() {
+            return this._count >= this._limit;
+        };
+
         // Создать пустую таблицу для хранения ходов и поиска победителя.
         MemoryTable.prototype.makeMove = function(player, x, y) {
             if (!~this._players.indexOf(player)) {
@@ -125,6 +130,7 @@
             if (report.hasWinner) {
                 report.winnerName = player;
             }
+            report.gameIsOver = this._gameIsOver();
             return report;
         };
 

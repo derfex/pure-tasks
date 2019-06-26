@@ -49,8 +49,17 @@
         elementTD.style.cursor = 'not-allowed';
 
         // Сообщить о победителе.
-        if (!report.hasWinner) return;
-        const again = confirm('Победил игрок «' + report.winnerName + '»! Желаете начать заново?');
+        if (report.hasWinner) {
+            const again = confirm('Победил игрок «' + report.winnerName + '»! Желаете начать заново?');
+            if (again) {
+                reset();
+            }
+            return;
+        }
+
+        // Проверить, завершена ли игра.
+        if (!report.gameIsOver) return;
+        const again = confirm('Игра окончена! Желаете начать заново?');
         if (again) {
             reset();
         }
