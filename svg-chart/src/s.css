@@ -1,0 +1,70 @@
+/* region ## fundamental */
+html {
+    background: #333;
+    color: #ddd;
+    font-family: sans-serif;
+}
+/* endregion */
+
+/* region ## chart */
+.chart__box {
+    width: 300px;
+}
+
+.chart__donut-base {
+    fill: #333;
+}
+
+.chart__donut-ring,
+.chart__donut-segment {
+    fill: transparent;
+}
+
+.chart__donut-ring,
+.chart__donut-segment {
+    stroke-width: 5;
+}
+
+.chart__donut-ring {
+    stroke: #ddd;
+}
+
+.chart__donut-segment {
+    transition-property: stroke, stroke-width;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+.chart__donut-segment:hover {
+    stroke-width: 7;
+}
+
+/* region ### segments */
+.chart__donut-segment--1 {
+    stroke: #fc0;
+    clip-path: polygon(50% -20%, 120% -20%, 120% 70%, 50% 50%);
+}
+
+.chart__donut-segment--1:hover {
+    stroke: #e1ae00;
+}
+
+.chart__donut-segment--2 {
+    stroke: #09d;
+    clip-path: polygon(50% 50%, 120% 70%, 120% 120%, 20% 120%);
+}
+
+.chart__donut-segment--2:hover {
+    stroke: #007ebf;
+}
+
+.chart__donut-segment--3 {
+    stroke: #d32;
+    clip-path: polygon(50% 50%, 20% 120%, -20% 120%, -20% -20%, 50% -20%);
+}
+
+.chart__donut-segment--3:hover {
+    stroke: #bf3322;
+}
+/* endregion */
+/* endregion */
