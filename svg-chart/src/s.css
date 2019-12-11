@@ -68,3 +68,62 @@ html {
 }
 /* endregion */
 /* endregion */
+
+/* region ## icons */
+.button {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    border: 0;
+    border-right: 3px;
+    height: 50px;
+    background: #999;
+}
+
+.button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+.button:hover {
+    background: #fc0;
+    color: #d32;
+}
+
+.button__icon {
+    width: 30px;
+    height: 30px;
+    fill: #333;
+}
+
+.button:hover .button__icon {
+    fill: #d32;
+}
+
+.button__caption {
+    padding: 5px;
+    font-weight: 600;
+}
+
+.button,
+.button__icon {
+    transition-property: background, color, fill, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+/* region ### changeable-icon */
+.button--changeable-icon .button__icon--secondary {
+    margin-left: -30px;
+    opacity: 0;
+}
+
+.button--changeable-icon:hover .button__icon--secondary {
+    opacity: 1;
+}
+
+.button--changeable-icon:hover .button__icon--primary {
+    opacity: 0;
+}
+/* endregion */
+/* endregion */
