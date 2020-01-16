@@ -72,9 +72,15 @@ const TEST_DATA = [
     },
 ];
 
+let failedTestsCount = 0;
 TEST_DATA.forEach((data, testIndex) => {
+    const testResult = binarySearch.apply(null, data.parameters) === data.result;
+    if (!testResult) {
+        ++failedTestsCount;
+    }
     console.assert(
-        binarySearch.apply(null, data.parameters) === data.result,
+        testResult,
         'Индекс теста:', testIndex, 'Параметры:', data,
     );
 });
+console.info('Количество непройденных тестов:', failedTestsCount);
