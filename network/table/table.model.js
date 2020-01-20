@@ -11,8 +11,6 @@ export class TableModel {
     }
 
     getItems() {
-        // return requestCommits()
-        return [1, 2]
+        return requestCommits()
     }
 }
-

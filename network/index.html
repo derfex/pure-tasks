@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Крестики-нолики</title>
-    <script>
-        window.module = Object.create(null);
-    </script>
+    <title>Network</title>
 </head>
 <body>
-<h1>!</h1>
+<h1>Commits</h1>
+<div id="commits-table"></div>
 <div class="scripts">
-    <script type="module" src="./table/index.js"></script>
-    <!--
     <script type="module">
-        import * as table from './table/index.js';
+        import { start } from './index.js';
+
+        start();
     </script>
-    -->
 </div>
 </body>
 </html>
