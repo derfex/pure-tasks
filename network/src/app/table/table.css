@@ -1,0 +1,46 @@
+.app-table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-family: monospace;
+}
+
+.app-table__row {
+    max-height: 32px;
+}
+
+.app-table__row:nth-child(odd) {
+    background: #eee;
+}
+
+.app-table__cell {
+    padding: 4px;
+    max-height: 24px;
+    line-height: 24px;
+}
+
+.app-table__cell--author {
+    width: 100px;
+}
+
+
+.app-message__ref {
+    display: inline-block;
+    max-width: 500px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.app-author__container {
+    display: flex;
+}
+
+.app-author__ref {
+    line-height: 24px;
+}
+
+.app-author__avatar {
+    width: 24px;
+    height: 24px;
+}
