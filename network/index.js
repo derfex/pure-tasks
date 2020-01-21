@@ -20,4 +20,12 @@ export async function start() {
     const view = new TableView(element);
     const controller = new TableController(model, view);
     await controller.init();
+
+    const response = await fetch('https://avatars1.githubusercontent.com/u/20978398?v=4');
+    const blob = await response.blob();
+    // создаём <img>
+    let img = document.createElement('img');
+    img.style = 'width:100px';
+    document.body.append(img);
+    img.src = URL.createObjectURL(blob);
 }
