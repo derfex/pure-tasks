@@ -1,7 +1,8 @@
+import { commits } from './commits.data.js';
+
 async function requestCommits() {
-    const url = 'https://api.github.com/repos/derfex/pure-tasks/commits';
-    const response = await fetch(url);
-    return await response.json();
+    // Same as `return commits;`.
+    return await new Promise((resolve) => resolve(commits));
 }
 
 
