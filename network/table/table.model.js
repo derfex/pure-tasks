@@ -7,10 +7,6 @@ async function requestCommits() {
 
 
 export class TableModel {
-    constructor(source) {
-        this.source = source;
-    }
-
     getItems() {
         return requestCommits()
     }
