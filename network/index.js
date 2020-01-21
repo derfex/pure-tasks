@@ -1,6 +1,8 @@
-import { TableModel } from './table/table.model.js';
-import { TableView } from './table/table.view.js';
-import { TableController } from './table/table.controller.js';
+import { TableModel } from './src/app/table/table.model.js';
+import { TableView } from './src/app/table/table.view.js';
+import { TableController } from './src/app/table/table.controller.js';
+
+const pathToTableStyle = 'src/app/table/table.css';
 
 function addCSSToDOM(url) {
     const style = document.createElement('link');
@@ -11,7 +13,7 @@ function addCSSToDOM(url) {
 }
 
 export async function start() {
-    addCSSToDOM('table/table.css');
+    addCSSToDOM(pathToTableStyle);
 
     const model = new TableModel();
     const element = document.getElementById('commits-table');
