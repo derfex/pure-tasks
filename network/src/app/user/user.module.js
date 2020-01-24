@@ -37,13 +37,25 @@ function createImage(blob) {
 
 // endregion # Avatar
 
+function appendResult(element, result) {
+    if (result.status === 'fulfilled') {
+        element.append(result.value);
+    } else {
+        throw new Error(result.reason);
+    }
+}
+
 
 export async function initUserModule(element) {
-    const userText = await requestUser();
-    const userElement = createSpan(userText);
-    const avatarBLOB = await requestAvatar();
-    const avatarElement = createImage(avatarBLOB);
-
-    element.append(avatarElement);
-    element.append(userElement);
+    const promises = [];
+    promises.push(
+        requestAvatar()
+            .then(avatarBLOB => createImage(avatarBLOB)),
+    );
+    promises.push(
+        requestUser()
+            .then(userText => createSpan(userText)),
+    );
+    const results = await Promise.allSettled(promises);
+    results.forEach(result => appendResult(element, result));
 }
