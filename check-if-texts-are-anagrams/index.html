@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Check if texts are anagrams</title>
+  <link rel="stylesheet" href="src/app/app.css">
+  <script>
+    window.module = Object.create(null);
+  </script>
+</head>
+<body>
+<h1>Check if texts are anagrams</h1>
+<form id="js-app__anagram-form">
+  <label>
+    Text 1
+    <input name="text1" type="text">
+  </label>
+  <label>
+    Text 2
+    <input name="text2" type="text">
+  </label>
+  <button type="submit">Check if the texts are anagrams: use the optimized algorithm</button>
+  <button id="js-app__non-optimized-checking">Check if the texts are anagrams: use the non-optimized algorithm</button>
+</form>
+<div aria-hidden hidden>
+  <script src="src/anagram/anagram.js"></script>
+  <script src="src/anagram/anagram-non-optimized.js"></script>
+  <script src="src/app/app.js"></script>
+</div>
+</body>
+</html>
