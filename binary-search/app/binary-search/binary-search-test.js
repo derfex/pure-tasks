@@ -72,6 +72,8 @@ const TEST_DATA = [
     },
 ];
 
+const binarySearch = window.module.Search.BinarySearch.findIndex;
+
 let failedTestsCount = 0;
 TEST_DATA.forEach((data, testIndex) => {
     const testResult = binarySearch.apply(null, data.parameters) === data.result;
