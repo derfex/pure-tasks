@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   // # Modules: `import` emulation
@@ -86,10 +86,7 @@
     if (!testResult) {
       ++failedTestsCount;
     }
-    console.assert(
-      testResult,
-      'Test index:', testIndex, 'Parameters:', data,
-    );
+    console.assert(testResult, 'Test index:', testIndex, 'Parameters:', data);
   });
   console.info('Number of failed tests:', failedTestsCount);
 })();
