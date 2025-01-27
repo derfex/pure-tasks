@@ -1,19 +1,18 @@
-(function() {
+(() => {
   'use strict';
 
-  // Modules
-  const Anagram = window.module.Anagram;
-  const AnagramNonOptimized = window.module.AnagramNonOptimized;
+  // # Modules: `import` emulation
+  const { Anagram, AnagramNonOptimized } = window.module;
 
-  
-  // Configuration
+
+  // # Configuration
   const anagramFormHTMLIdentifier = 'js-app__anagram-form';
   const anagramFormText1InputName = 'text1';
   const anagramFormText2InputName = 'text2';
   const nonOptimizedAnagramCheckButtonHTMLIdentifier = 'js-app__non-optimized-checking';
 
 
-  // Anagram form
+  // # Anagram form
   const anagramForm = document.getElementById(anagramFormHTMLIdentifier);
   anagramForm.addEventListener('submit', (submitEvent) => {
     submitEvent.preventDefault();
@@ -29,9 +28,9 @@
     const result = AnagramNonOptimized.checkIfTextsAreAnagrams(text1, text2);
     alert(`Non-optimized check: \`${result}\`.`);
   });
-  
 
-  // Auxilary functions
+
+  // # Auxiliary functions
   function getFormValues() {
     const formData = new FormData(anagramForm);
     const text1 = formData.get(anagramFormText1InputName);

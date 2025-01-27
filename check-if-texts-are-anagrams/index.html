@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Check if texts are anagrams</title>
-  <link rel="stylesheet" href="src/app/app.css">
+  <link href="src/app/app.css" rel="stylesheet">
   <script>
     window.module = Object.create(null);
   </script>
+  <script defer src="src/anagram/anagram.js"></script>
+  <script defer src="src/anagram/anagram-non-optimized.js"></script>
+  <script defer src="src/app/app.js"></script>
 </head>
 <body>
 <h1>Check if texts are anagrams</h1>
@@ -20,12 +23,9 @@
     <input name="text2" type="text">
   </label>
   <button type="submit">Check if the texts are anagrams: use the optimized algorithm</button>
-  <button id="js-app__non-optimized-checking">Check if the texts are anagrams: use the non-optimized algorithm</button>
+  <button id="js-app__non-optimized-checking">
+    Check if the texts are anagrams: use the non-optimized algorithm
+  </button>
 </form>
-<div aria-hidden hidden>
-  <script src="src/anagram/anagram.js"></script>
-  <script src="src/anagram/anagram-non-optimized.js"></script>
-  <script src="src/app/app.js"></script>
-</div>
 </body>
 </html>
