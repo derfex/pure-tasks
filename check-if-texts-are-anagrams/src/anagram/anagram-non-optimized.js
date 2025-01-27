@@ -1,7 +1,7 @@
-(function() {
+(() => {
   'use strict';
 
-  window.module.AnagramNonOptimized = (function() {
+  window.module.AnagramNonOptimized = (() => {
     /**
      * A set of functions for checking if two texts are anagrams of each other.
      */
@@ -13,7 +13,7 @@
      * @param {string} text2 — the second text to comparison.
      * @returns {boolean}
      */
-    Anagram.checkIfTextsAreAnagrams = function(text1, text2) {
+    Anagram.checkIfTextsAreAnagrams = (text1, text2) => {
       const normalizedText1 = normalizeText(text1);
       const normalizedText2 = normalizeText(text2);
       return normalizedText1 === normalizedText2;
@@ -38,12 +38,12 @@
     function normalizeText(text) {
       return text
         .split('')
-        .map(symbol => symbol.toLowerCase())
-        .filter(symbol => allowedSymbolsSet.has(symbol))
+        .map((symbol) => symbol.toLowerCase())
+        .filter((symbol) => allowedSymbolsSet.has(symbol))
         .sort()
         .join('');
     }
 
-    return Anagram
+    return Anagram;
   })();
 })();
