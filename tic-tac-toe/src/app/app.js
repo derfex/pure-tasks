@@ -1,76 +1,78 @@
-(function() {
-    'use strict';
+(() => {
+  'use strict';
 
-    // Модули.
-    const MemoryTable = window.module.MemoryTable;
-    const PlayerList = window.module.PlayerList;
-    const PlayingField = window.module.PlayingField;
-
-
-    // Константы.
-    const SIZE = 3;
-    const PLAYERS_DATA = [{
-        NAME: 'A',
-        COLOR: '#09d',
-    }, {
-        NAME: 'B',
-        COLOR: '#fc0',
-    }];
-    const PLAYERS_NAME = PLAYERS_DATA.map(player => player.NAME);
-
-    const reset = function reset() {
-        location.reload();
-    };
+  // # Modules: `import` emulation
+  const {
+    MemoryTable,
+    PlayerList,
+    PlayingField,
+  } = window.module;
 
 
-    // Менеджеры данных.
-    const playerList = new PlayerList(PLAYERS_DATA);
-    const memoryTable = new MemoryTable(SIZE, PLAYERS_NAME);
+  // # Configuration
+  const size = 3;
+  const playersData = [{
+    color: '#09d',
+    name: 'A',
+  }, {
+    color: '#fc0',
+    name: 'B',
+  }];
+  const playerNames = playersData.map(player => player.name);
+
+  const reset = () => {
+    location.reload();
+  };
 
 
-    // Игровое поле.
-    const elementTableBox = document.getElementById('js-app__table-box');
-    elementTableBox.appendChild(PlayingField.createTable(SIZE));
-    elementTableBox.addEventListener('click', function(event) {
-        const elementTD = event.target.closest('td');
-        if (!elementTD) return; // Щелчок вне `<td>`, не интересует.
+  // # Data managers
+  const playerList = new PlayerList(playersData);
+  const memoryTable = new MemoryTable(size, playerNames);
 
-        // Выполнить ход текущим игроком.
-        const player = playerList.getNext();
-        const report = memoryTable.makeMove(
-            player.NAME,
-            elementTD.cellIndex,
-            elementTD.parentElement.rowIndex
-        );
 
-        // Применить визуальное состояние.
-        if (!report.moveIsCorrect) {
-            // Сместить указатель обратно, на предыдущего игрока.
-            playerList.revert();
-            return;
-        }
-        PlayingField.markCell(elementTD, player.COLOR);
+  // # Playing field
+  const tableBoxElement = document.getElementById('js-app__table-box');
+  tableBoxElement.appendChild(PlayingField.createTable(size));
+  tableBoxElement.addEventListener('click', ({ target }) => {
+    const elementTD = target.closest('td');
+    if (!elementTD) return; // Click outside `<td>`, not interested.
 
-        // Сообщить о победителе.
-        if (report.hasWinner) {
-            const again = confirm('Победил игрок «' + report.winnerName + '»! Желаете начать заново?');
-            if (again) {
-                reset();
-            }
-            return;
-        }
+    // Выполнить ход текущим игроком.
+    const player = playerList.getNext();
+    const report = memoryTable.makeMove(
+      player.name,
+      elementTD.cellIndex,
+      elementTD.parentElement.rowIndex,
+    );
 
-        // Проверить, завершена ли игра.
-        if (!report.gameIsOver) return;
-        const again = confirm('Игра окончена! Желаете начать заново?');
-        if (again) {
-            reset();
-        }
-    });
+    // Применить визуальное состояние.
+    if (!report.moveIsCorrect) {
+      // Сместить указатель обратно, на предыдущего игрока.
+      playerList.revert();
+      return;
+    }
+    PlayingField.markCell(elementTD, player.color);
 
-    // Кнопка «Начать заново».
-    const elementStartAgain = document.getElementById('js-app__start-again');
-    elementStartAgain.addEventListener('click', () => {
+    // Сообщить о победителе.
+    if (report.hasWinner) {
+      const again = confirm('Победил игрок «' + report.winnerName + '»! Желаете начать заново?');
+      if (again) {
         reset();
-    });
+      }
+      return;
+    }
+
+    // Проверить, завершена ли игра.
+    if (!report.gameIsOver) return;
+    const again = confirm('Игра окончена! Желаете начать заново?');
+    if (again) {
+      reset();
+    }
+  });
+
+  // # Button “Start again”
+  const startAgainButtonElement = document.getElementById('js-app__start-again');
+  startAgainButtonElement.addEventListener('click', () => {
+    reset();
+  });
 })();
