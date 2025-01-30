@@ -8,11 +8,12 @@
      * @param {readonly string[]} players — valid players, a string array.
      */
     class MemoryTable {
+      #matrix;
       #size;
 
       constructor(size, players) {
+        this.#matrix = this._createMatrix(size);
         this.#size = size;
-        this._matrix = this._createMatrix(size);
 
         // Current and maximum number of moves.
         this._count = 0;
@@ -33,7 +34,7 @@
       }
 
       _setMove(player, x, y) {
-        const column = this._matrix[x];
+        const column = this.#matrix[x];
         if (column[y] !== undefined) {
           return false;
         }
@@ -47,7 +48,7 @@
       _checkColumns() {
         for (let x = 0; x < this.#size; x++) {
           for (let y = 0; y < this.#size; y++) {
-            if (this._matrix[x][y] !== this._lastPlayer) {
+            if (this.#matrix[x][y] !== this._lastPlayer) {
               break;
             }
             if (y === this.#size - 1) {
@@ -62,7 +63,7 @@
       _checkRows() {
         for (let y = 0; y < this.#size; y++) {
           for (let x = 0; x < this.#size; x++) {
-            if (this._matrix[x][y] !== this._lastPlayer) {
+            if (this.#matrix[x][y] !== this._lastPlayer) {
               break;
             }
             if (x === this.#size - 1) {
@@ -77,7 +78,7 @@
       _checkDiagonals() {
         let hasWinner = false;
         for (let i = 0; i < this.#size; i++) {
-          if (this._matrix[i][i] !== this._lastPlayer) {
+          if (this.#matrix[i][i] !== this._lastPlayer) {
             break;
           }
           if (i === this.#size - 1) {
@@ -86,7 +87,7 @@
         }
         if (hasWinner) return true;
         for (let i = 0; i < this.#size; i++) {
-          if (this._matrix[i][this.#size - 1 - i] !== this._lastPlayer) {
+          if (this.#matrix[i][this.#size - 1 - i] !== this._lastPlayer) {
             break;
           }
           if (i === this.#size - 1) {
@@ -141,7 +142,7 @@
         let toString = 'Visual representation:\r\n';
         for (let y = 0; y < this.#size; y++) {
           for (let x = 0; x < this.#size; x++) {
-            const value = this._matrix[x][y];
+            const value = this.#matrix[x][y];
             toString += value === undefined
               ? '_'
               : value;
