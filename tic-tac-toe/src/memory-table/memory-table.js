@@ -125,17 +125,15 @@
         return matrix;
       }
 
-      // Проверить, завершена ли игра.
       #gameIsOver() {
         return this.#movesCount >= this.#movesLimit;
       }
 
       // Check if the last move was a winning one.
       #hasWinner() {
-        for (let i = CHECK_LIST.length - 1; i > -1; --i) {
-          if (this[CHECK_LIST[i]]()) return true;
-        }
-        return false;
+        if (this.#checkDiagonals()) return true;
+        if (this.#checkColumns()) return true;
+        return this.#checkRows();
       }
 
       #setMove(player, x, y) {
@@ -149,12 +147,6 @@
         return true;
       }
     }
-
-    const CHECK_LIST = [
-      '#checkColumns',
-      '#checkRows',
-      '#checkDiagonals',
-    ];
 
     const module = Object.create(null);
     module.MemoryTable = MemoryTable;
