@@ -4,8 +4,7 @@
   window.module.MemoryTable = (() => {
     /**
      * Class that allows to determine the winner in Tic-Tac-Toe.
-     * @param {number} size — size, a small natural number.
-     * @param {readonly string[]} players — valid players, a string array.
+     * @class
      */
     class MemoryTable {
       #lastPlayer = null;
@@ -15,6 +14,12 @@
       #players = [];
       #size = 0;
 
+      /**
+       * Create a new `MemoryTable`.
+       * @constructor
+       * @param {number} size — size, a small natural number.
+       * @param {readonly string[]} players — valid players, a string array.
+       */
       constructor(size, players) {
         this.#matrix = this.#createMatrix(size);
         this.#size = size;
