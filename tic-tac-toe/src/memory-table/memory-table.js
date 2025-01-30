@@ -8,8 +8,10 @@
      * @param {readonly string[]} players — valid players, a string array.
      */
     class MemoryTable {
+      #size;
+
       constructor(size, players) {
-        this._size = size;
+        this.#size = size;
         this._matrix = this._createMatrix(size);
 
         // Current and maximum number of moves.
@@ -43,12 +45,12 @@
 
       // Проверить, был ли последний ход победным. В столбцах.
       _checkColumns() {
-        for (let x = 0; x < this._size; x++) {
-          for (let y = 0; y < this._size; y++) {
+        for (let x = 0; x < this.#size; x++) {
+          for (let y = 0; y < this.#size; y++) {
             if (this._matrix[x][y] !== this._lastPlayer) {
               break;
             }
-            if (y === this._size - 1) {
+            if (y === this.#size - 1) {
               return true;
             }
           }
@@ -58,12 +60,12 @@
 
       // Проверить, был ли последний ход победным. В строках.
       _checkRows() {
-        for (let y = 0; y < this._size; y++) {
-          for (let x = 0; x < this._size; x++) {
+        for (let y = 0; y < this.#size; y++) {
+          for (let x = 0; x < this.#size; x++) {
             if (this._matrix[x][y] !== this._lastPlayer) {
               break;
             }
-            if (x === this._size - 1) {
+            if (x === this.#size - 1) {
               return true;
             }
           }
@@ -74,20 +76,20 @@
       // Проверить, был ли последний ход победным. В диагоналях.
       _checkDiagonals() {
         let hasWinner = false;
-        for (let i = 0; i < this._size; i++) {
+        for (let i = 0; i < this.#size; i++) {
           if (this._matrix[i][i] !== this._lastPlayer) {
             break;
           }
-          if (i === this._size - 1) {
+          if (i === this.#size - 1) {
             hasWinner = true;
           }
         }
         if (hasWinner) return true;
-        for (let i = 0; i < this._size; i++) {
-          if (this._matrix[i][this._size - 1 - i] !== this._lastPlayer) {
+        for (let i = 0; i < this.#size; i++) {
+          if (this._matrix[i][this.#size - 1 - i] !== this._lastPlayer) {
             break;
           }
-          if (i === this._size - 1) {
+          if (i === this.#size - 1) {
             hasWinner = true;
           }
         }
@@ -118,7 +120,7 @@
         if (!~this._players.indexOf(player)) {
           throw new Error('Неизвестный игрок.');
         }
-        if (x < 0 || x >= this._size || y < 0 || y >= this._size) {
+        if (x < 0 || x >= this.#size || y < 0 || y >= this.#size) {
           throw new Error('Недопустимые координаты.');
         }
         const report = Object.create(null);
@@ -137,8 +139,8 @@
       // Method for debugging.
       debug() {
         let toString = 'Visual representation:\r\n';
-        for (let y = 0; y < this._size; y++) {
-          for (let x = 0; x < this._size; x++) {
+        for (let y = 0; y < this.#size; y++) {
+          for (let x = 0; x < this.#size; x++) {
             const value = this._matrix[x][y];
             toString += value === undefined
               ? '_'
@@ -155,48 +157,6 @@
       '_checkRows',
       '_checkDiagonals',
     ];
-
-    /**
-     * Make a move.
-     * @param player — player name.
-     * @param x — `x` coordinate.
-     * @param y — `y` coordinate.
-     * @returns {object} — report on the state of the game after the move.
-     */
-    MemoryTable.prototype.makeMove = function(player, x, y) {
-      if (!~this._players.indexOf(player)) {
-        throw new Error('Unknown player.');
-      }
-      if (x < 0 || x >= this._size || y < 0 || y >= this._size) {
-        throw new Error('Invalid coordinates.');
-      }
-      const report = Object.create(null);
-      report.moveIsCorrect = this._setMove(player, x, y);
-      if (!report.moveIsCorrect) {
-        return report;
-      }
-      report.hasWinner = this._hasWinner();
-      if (report.hasWinner) {
-        report.winnerName = player;
-      }
-      report.gameIsOver = this._gameIsOver();
-      return report;
-    };
-
-    // Method for debugging.
-    MemoryTable.prototype.debug = function() {
-      let toString = 'Visual representation:\r\n';
-      for (let y = 0; y < this._size; y++) {
-        for (let x = 0; x < this._size; x++) {
-          const value = this._matrix[x][y];
-          toString += value === undefined
-            ? '_'
-            : value;
-        }
-        toString += '\r\n';
-      }
-      return toString;
-    };
 
     const module = Object.create(null);
     module.MemoryTable = MemoryTable;
