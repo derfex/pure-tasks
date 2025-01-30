@@ -39,48 +39,29 @@
 
       /**
        * Make a move.
-       * @param player — player name.
-       * @param x — `x` coordinate.
-       * @param y — `y` coordinate.
+       * @param {string} playerName — player name.
+       * @param {number} x — `x` coordinate.
+       * @param {number} y — `y` coordinate.
        * @returns {object} — report on the state of the game after the move.
        */
-      makeMove(player, x, y) {
-        if (!~this.#players.indexOf(player)) {
-          throw new Error('Неизвестный игрок.');
+      makeMove(playerName, x, y) {
+        if (!~this.#players.indexOf(playerName)) {
+          throw new Error('Unknown playerName.');
         }
         if (x < 0 || x >= this.#size || y < 0 || y >= this.#size) {
-          throw new Error('Недопустимые координаты.');
+          throw new Error('Invalid coordinates.');
         }
         const report = Object.create(null);
-        report.moveIsCorrect = this.#setMove(player, x, y);
+        report.moveIsCorrect = this.#setMove(playerName, x, y);
         if (!report.moveIsCorrect) {
           return report;
         }
-        report.hasWinner = this._hasWinner();
+        report.hasWinner = this.#hasWinner();
         if (report.hasWinner) {
-          report.winnerName = player;
+          report.winnerName = playerName;
         }
-        report.gameIsOver = this._gameIsOver();
+        report.gameIsOver = this.#gameIsOver();
         return report;
-      }
-
-      #createMatrix(size) {
-        const matrix = [];
-        for (let i = 0; i < size; i++) {
-          matrix.push(new Array(size));
-        }
-        return matrix;
-      }
-
-      #setMove(player, x, y) {
-        const column = this.#matrix[x];
-        if (column[y] !== undefined) {
-          return false;
-        }
-        column[y] = player;
-        this.#lastPlayer = player;
-        ++this.#movesCount;
-        return true;
       }
 
       // Check if the last move was a winning one. In columns.
@@ -136,17 +117,36 @@
         return hasWinner;
       }
 
+      #createMatrix(size) {
+        const matrix = [];
+        for (let i = 0; i < size; i++) {
+          matrix.push(new Array(size));
+        }
+        return matrix;
+      }
+
+      // Проверить, завершена ли игра.
+      #gameIsOver() {
+        return this.#movesCount >= this.#movesLimit;
+      }
+
       // Check if the last move was a winning one.
-      _hasWinner() {
+      #hasWinner() {
         for (let i = CHECK_LIST.length - 1; i > -1; --i) {
           if (this[CHECK_LIST[i]]()) return true;
         }
         return false;
       }
 
-      // Проверить, завершена ли игра.
-      _gameIsOver() {
-        return this.#movesCount >= this.#movesLimit;
+      #setMove(player, x, y) {
+        const column = this.#matrix[x];
+        if (column[y] !== undefined) {
+          return false;
+        }
+        column[y] = player;
+        this.#lastPlayer = player;
+        ++this.#movesCount;
+        return true;
       }
     }
 
