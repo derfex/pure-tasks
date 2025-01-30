@@ -2,45 +2,53 @@
   'use strict';
 
   window.module.PlayerList = (() => {
+    /**
+     * Class that allows to determine the current player's data.
+     * @class
+     */
     class PlayerList {
+      #currentPlayerIndex = 0;
+      #limit = 0;
+      #players = [];
+
       /**
-       * Класс, позволяющий определить данные текущего игрока.
-       * @param {object[]} dataPlayers — данные об игроках.
+       * Create a new `PlayerList`.
        * @constructor
+       * @param {readonly unknown[]} players — данные об игроках.
        */
-      constructor(dataPlayers) {
-        this._DATA_PLAYERS = dataPlayers.slice();
-        this._DATA_PLAYERS.forEach(player => {
+      constructor(players) {
+        this.#players = players.slice();
+        this.#players.forEach(player => {
           Object.freeze(player);
         });
 
-        this._LIMIT = this._DATA_PLAYERS.length - 1;
+        this.#limit = this.#players.length - 1;
 
-        this._currentPlayerIndex = this._LIMIT;
+        this.#currentPlayerIndex = this.#limit;
       }
 
       /**
-       * Получить следующего игрока.
-       * @returns {Object}
+       * Get the next player's data.
+       * @returns {unknown}
        */
       getNext() {
-        let index = this._currentPlayerIndex + 1;
-        if (index > this._LIMIT) {
+        let index = this.#currentPlayerIndex + 1;
+        if (index > this.#limit) {
           index = 0;
         }
-        this._currentPlayerIndex = index;
-        return this._DATA_PLAYERS[index];
+        this.#currentPlayerIndex = index;
+        return this.#players[index];
       }
 
       /**
-       * Вернуть предыдущее состояние.
+       * Revert to previous state.
        */
       revert() {
-        let index = this._currentPlayerIndex - 1;
+        let index = this.#currentPlayerIndex - 1;
         if (index < 0) {
-          index = this._LIMIT;
+          index = this.#limit;
         }
-        this._currentPlayerIndex = index;
+        this.#currentPlayerIndex = index;
       }
     }
 
