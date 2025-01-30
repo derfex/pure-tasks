@@ -83,8 +83,8 @@
         return true;
       }
 
-      // Проверить, был ли последний ход победным. В столбцах.
-      _checkColumns() {
+      // Check if the last move was a winning one. In columns.
+      #checkColumns() {
         for (let x = 0; x < this.#size; x++) {
           for (let y = 0; y < this.#size; y++) {
             if (this.#matrix[x][y] !== this.#lastPlayer) {
@@ -98,8 +98,8 @@
         return false;
       }
 
-      // Проверить, был ли последний ход победным. В строках.
-      _checkRows() {
+      // Check if the last move was a winning one. In rows.
+      #checkRows() {
         for (let y = 0; y < this.#size; y++) {
           for (let x = 0; x < this.#size; x++) {
             if (this.#matrix[x][y] !== this.#lastPlayer) {
@@ -113,8 +113,8 @@
         return false;
       }
 
-      // Проверить, был ли последний ход победным. В диагоналях.
-      _checkDiagonals() {
+      // Check if the last move was a winning one. In diagonals.
+      #checkDiagonals() {
         let hasWinner = false;
         for (let i = 0; i < this.#size; i++) {
           if (this.#matrix[i][i] !== this.#lastPlayer) {
@@ -136,7 +136,7 @@
         return hasWinner;
       }
 
-      // Проверить, был ли последний ход победным.
+      // Check if the last move was a winning one.
       _hasWinner() {
         for (let i = CHECK_LIST.length - 1; i > -1; --i) {
           if (this[CHECK_LIST[i]]()) return true;
@@ -151,9 +151,9 @@
     }
 
     const CHECK_LIST = [
-      '_checkColumns',
-      '_checkRows',
-      '_checkDiagonals',
+      '#checkColumns',
+      '#checkRows',
+      '#checkDiagonals',
     ];
 
     const module = Object.create(null);
