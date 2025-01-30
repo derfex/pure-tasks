@@ -9,15 +9,15 @@
      */
     class MemoryTable {
       #matrix;
+      #movesCount = 0;
+      #movesLimit;
       #size;
 
       constructor(size, players) {
         this.#matrix = this._createMatrix(size);
         this.#size = size;
 
-        // Current and maximum number of moves.
-        this._count = 0;
-        this._limit = size * size;
+        this.#movesLimit = size * size;
 
         // Набор допустимых игроков.
         this._players = players.slice();
@@ -40,7 +40,7 @@
         }
         column[y] = player;
         this._lastPlayer = player;
-        ++this._count;
+        ++this.#movesCount;
         return true;
       }
 
@@ -107,7 +107,7 @@
 
       // Проверить, завершена ли игра.
       _gameIsOver() {
-        return this._count >= this._limit;
+        return this.#movesCount >= this.#movesLimit;
       }
 
       /**
