@@ -52,7 +52,7 @@
           throw new Error('Недопустимые координаты.');
         }
         const report = Object.create(null);
-        report.moveIsCorrect = this._setMove(player, x, y);
+        report.moveIsCorrect = this.#setMove(player, x, y);
         if (!report.moveIsCorrect) {
           return report;
         }
@@ -72,7 +72,7 @@
         return matrix;
       }
 
-      _setMove(player, x, y) {
+      #setMove(player, x, y) {
         const column = this.#matrix[x];
         if (column[y] !== undefined) {
           return false;
