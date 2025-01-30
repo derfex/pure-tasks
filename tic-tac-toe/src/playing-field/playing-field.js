@@ -8,12 +8,12 @@
     const PlayingField = Object.create(null);
 
     const createRow = size => {
-      const elementTR = document.createElement('tr');
+      const trElement = document.createElement('tr');
       for (let i = 0; i < size; i++) {
-        const elementTD = document.createElement('td');
-        elementTR.appendChild(elementTD);
+        const tdElement = document.createElement('td');
+        trElement.appendChild(tdElement);
       }
-      return elementTR;
+      return trElement;
     };
 
     /**
@@ -22,22 +22,22 @@
      * @returns {HTMLTableElement}
      */
     PlayingField.createTable = size => {
-      const elementTable = document.createElement('table');
+      const tableElement = document.createElement('table');
       for (let i = 0; i < size; i++) {
-        const elementTR = createRow(size);
-        elementTable.appendChild(elementTR);
+        const trElement = createRow(size);
+        tableElement.appendChild(trElement);
       }
-      return elementTable;
+      return tableElement;
     };
 
     /**
      * Отметить ячейку игрового поля.
-     * @param {HTMLTableCellElement} elementCell — указатель на DOM-element.
+     * @param {HTMLTableCellElement} cellElement — указатель на DOM-element.
      * @param {string} color — цвет фона.
      */
-    PlayingField.markCell = (elementCell, color) => {
-      elementCell.style.backgroundColor = color;
-      elementCell.style.cursor = 'not-allowed';
+    PlayingField.markCell = (cellElement, color) => {
+      cellElement.style.backgroundColor = color;
+      cellElement.style.cursor = 'not-allowed';
     };
 
     return PlayingField;
