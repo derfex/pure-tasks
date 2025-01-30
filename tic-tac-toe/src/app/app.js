@@ -3,7 +3,7 @@
 
   // # Modules: `import` emulation
   const {
-    MemoryTable,
+    MemoryTable: { MemoryTable },
     PlayerList,
     PlayingField,
   } = window.module;
@@ -11,14 +11,17 @@
 
   // # Configuration
   const size = 3;
-  const playersData = [{
-    color: '#09d',
-    name: 'A',
-  }, {
-    color: '#fc0',
-    name: 'B',
-  }];
-  const playerNames = playersData.map(player => player.name);
+  const playersData = [
+    {
+      color: '#09d',
+      name: 'A',
+    },
+    {
+      color: '#fc0',
+      name: 'B',
+    },
+  ];
+  const playerNames = playersData.map(({ name }) => name);
 
   const reset = () => {
     location.reload();
@@ -37,23 +40,18 @@
     const elementTD = target.closest('td');
     if (!elementTD) return; // Click outside `<td>`, not interested.
 
-    // Выполнить ход текущим игроком.
+    // Make a move by the current player.
     const player = playerList.getNext();
-    const report = memoryTable.makeMove(
-      player.name,
-      elementTD.cellIndex,
-      elementTD.parentElement.rowIndex,
-    );
+    const report = memoryTable.makeMove(player.name, elementTD.cellIndex, elementTD.parentElement.rowIndex);
 
-    // Применить визуальное состояние.
+    // Apply visual state.
     if (!report.moveIsCorrect) {
-      // Сместить указатель обратно, на предыдущего игрока.
+      // Move the pointer back to the previous player.
       playerList.revert();
       return;
     }
     PlayingField.markCell(elementTD, player.color);
 
-    // Сообщить о победителе.
     if (report.hasWinner) {
       const again = confirm('Победил игрок «' + report.winnerName + '»! Желаете начать заново?');
       if (again) {
@@ -62,7 +60,6 @@
       return;
     }
 
-    // Проверить, завершена ли игра.
     if (!report.gameIsOver) return;
     const again = confirm('Игра окончена! Желаете начать заново?');
     if (again) {
