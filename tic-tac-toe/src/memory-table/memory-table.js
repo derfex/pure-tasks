@@ -16,13 +16,55 @@
       #size = 0;
 
       constructor(size, players) {
-        this.#matrix = this._createMatrix(size);
+        this.#matrix = this.#createMatrix(size);
         this.#size = size;
         this.#movesLimit = size * size;
         this.#players = players.slice();
       }
 
-      _createMatrix(size) {
+      // Method for debugging.
+      debug() {
+        let toString = 'Visual representation:\r\n';
+        for (let y = 0; y < this.#size; y++) {
+          for (let x = 0; x < this.#size; x++) {
+            const value = this.#matrix[x][y];
+            toString += value === undefined
+              ? '_'
+              : value;
+          }
+          toString += '\r\n';
+        }
+        return toString;
+      };
+
+      /**
+       * Make a move.
+       * @param player — player name.
+       * @param x — `x` coordinate.
+       * @param y — `y` coordinate.
+       * @returns {object} — report on the state of the game after the move.
+       */
+      makeMove(player, x, y) {
+        if (!~this.#players.indexOf(player)) {
+          throw new Error('Неизвестный игрок.');
+        }
+        if (x < 0 || x >= this.#size || y < 0 || y >= this.#size) {
+          throw new Error('Недопустимые координаты.');
+        }
+        const report = Object.create(null);
+        report.moveIsCorrect = this._setMove(player, x, y);
+        if (!report.moveIsCorrect) {
+          return report;
+        }
+        report.hasWinner = this._hasWinner();
+        if (report.hasWinner) {
+          report.winnerName = player;
+        }
+        report.gameIsOver = this._gameIsOver();
+        return report;
+      }
+
+      #createMatrix(size) {
         const matrix = [];
         for (let i = 0; i < size; i++) {
           matrix.push(new Array(size));
@@ -106,48 +148,6 @@
       _gameIsOver() {
         return this.#movesCount >= this.#movesLimit;
       }
-
-      /**
-       * Make a move.
-       * @param player — player name.
-       * @param x — `x` coordinate.
-       * @param y — `y` coordinate.
-       * @returns {object} — report on the state of the game after the move.
-       */
-      makeMove(player, x, y) {
-        if (!~this.#players.indexOf(player)) {
-          throw new Error('Неизвестный игрок.');
-        }
-        if (x < 0 || x >= this.#size || y < 0 || y >= this.#size) {
-          throw new Error('Недопустимые координаты.');
-        }
-        const report = Object.create(null);
-        report.moveIsCorrect = this._setMove(player, x, y);
-        if (!report.moveIsCorrect) {
-          return report;
-        }
-        report.hasWinner = this._hasWinner();
-        if (report.hasWinner) {
-          report.winnerName = player;
-        }
-        report.gameIsOver = this._gameIsOver();
-        return report;
-      }
-
-      // Method for debugging.
-      debug() {
-        let toString = 'Visual representation:\r\n';
-        for (let y = 0; y < this.#size; y++) {
-          for (let x = 0; x < this.#size; x++) {
-            const value = this.#matrix[x][y];
-            toString += value === undefined
-              ? '_'
-              : value;
-          }
-          toString += '\r\n';
-        }
-        return toString;
-      };
     }
 
     const CHECK_LIST = [
