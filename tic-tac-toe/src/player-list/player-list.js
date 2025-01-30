@@ -14,7 +14,7 @@
       /**
        * Create a new `PlayerList`.
        * @constructor
-       * @param {readonly unknown[]} players — данные об игроках.
+       * @param {readonly unknown[]} players — data about players.
        */
       constructor(players) {
         this.#players = players.slice();
@@ -29,7 +29,7 @@
 
       /**
        * Get the next player's data.
-       * @returns {unknown}
+       * @returns {unknown} — the next player's data.
        */
       getNext() {
         let index = this.#currentPlayerIndex + 1;
@@ -42,6 +42,7 @@
 
       /**
        * Revert to previous state.
+       * @returns {void}.
        */
       revert() {
         let index = this.#currentPlayerIndex - 1;
