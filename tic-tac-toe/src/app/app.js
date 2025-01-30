@@ -53,15 +53,16 @@
     PlayingField.markCell(elementTD, player.color);
 
     if (report.hasWinner) {
-      const again = confirm('Победил игрок «' + report.winnerName + '»! Желаете начать заново?');
+      const again = confirm(`Player “${report.winnerName}” has won! Would you like to start again?`);
       if (again) {
         reset();
       }
+      alert(`Let us pretend that player “${report.winnerName}” did not win.`)
       return;
     }
 
     if (!report.gameIsOver) return;
-    const again = confirm('Игра окончена! Желаете начать заново?');
+    const again = confirm('Game over! Would you like to start again?');
     if (again) {
       reset();
     }
