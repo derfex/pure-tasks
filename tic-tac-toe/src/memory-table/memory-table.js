@@ -8,21 +8,18 @@
      * @param {readonly string[]} players — valid players, a string array.
      */
     class MemoryTable {
-      #matrix;
+      #lastPlayer = null;
+      #matrix = [];
       #movesCount = 0;
-      #movesLimit;
-      #size;
+      #movesLimit = 0;
+      #players = [];
+      #size = 0;
 
       constructor(size, players) {
         this.#matrix = this._createMatrix(size);
         this.#size = size;
-
         this.#movesLimit = size * size;
-
-        // Набор допустимых игроков.
-        this._players = players.slice();
-
-        this._lastPlayer = null;
+        this.#players = players.slice();
       }
 
       _createMatrix(size) {
@@ -39,7 +36,7 @@
           return false;
         }
         column[y] = player;
-        this._lastPlayer = player;
+        this.#lastPlayer = player;
         ++this.#movesCount;
         return true;
       }
@@ -48,7 +45,7 @@
       _checkColumns() {
         for (let x = 0; x < this.#size; x++) {
           for (let y = 0; y < this.#size; y++) {
-            if (this.#matrix[x][y] !== this._lastPlayer) {
+            if (this.#matrix[x][y] !== this.#lastPlayer) {
               break;
             }
             if (y === this.#size - 1) {
@@ -63,7 +60,7 @@
       _checkRows() {
         for (let y = 0; y < this.#size; y++) {
           for (let x = 0; x < this.#size; x++) {
-            if (this.#matrix[x][y] !== this._lastPlayer) {
+            if (this.#matrix[x][y] !== this.#lastPlayer) {
               break;
             }
             if (x === this.#size - 1) {
@@ -78,7 +75,7 @@
       _checkDiagonals() {
         let hasWinner = false;
         for (let i = 0; i < this.#size; i++) {
-          if (this.#matrix[i][i] !== this._lastPlayer) {
+          if (this.#matrix[i][i] !== this.#lastPlayer) {
             break;
           }
           if (i === this.#size - 1) {
@@ -87,7 +84,7 @@
         }
         if (hasWinner) return true;
         for (let i = 0; i < this.#size; i++) {
-          if (this.#matrix[i][this.#size - 1 - i] !== this._lastPlayer) {
+          if (this.#matrix[i][this.#size - 1 - i] !== this.#lastPlayer) {
             break;
           }
           if (i === this.#size - 1) {
@@ -118,7 +115,7 @@
        * @returns {object} — report on the state of the game after the move.
        */
       makeMove(player, x, y) {
-        if (!~this._players.indexOf(player)) {
+        if (!~this.#players.indexOf(player)) {
           throw new Error('Неизвестный игрок.');
         }
         if (x < 0 || x >= this.#size || y < 0 || y >= this.#size) {
