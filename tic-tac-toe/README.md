@@ -32,9 +32,14 @@ declare class PlayerList<P> {
   public getNext(): P;
   public revert(): void;
 }
+
+declare function createTable(size: number): HTMLTableElement;
+
+declare function markCell(cellElement: HTMLTableCellElement, color: string): void;
 ```
 
 ## Required web technologies
 
-- ECMAScript 2022 (ES13).
+- ECMAScript 2022 (ES13)
+    - Private properties and methods
 - [HTMLScriptElement: defer property](https://html.spec.whatwg.org/multipage/scripting.html#dom-script-defer)
