@@ -3,15 +3,24 @@ html {
 }
 
 body {
+  display: table;
   padding: 16px;
 }
 
-h1 {
+.app-main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.app-title {
+  margin: 0;
   font-family: sans-serif;
+  color: #ccc;
 }
 
 #js-app__start-again {
-  margin-top: 2em;
   padding: 5px;
-  width: 170px;
+  width: 100%;
 }
