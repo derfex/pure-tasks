@@ -37,12 +37,12 @@
   const tableBoxElement = document.getElementById('js-app__table-box');
   tableBoxElement.appendChild(PlayingField.createTable(size));
   tableBoxElement.addEventListener('click', ({ target }) => {
-    const elementTD = target.closest('td');
-    if (!elementTD) return; // Click outside `<td>`, not interested.
+    const tdElement = target.closest('td');
+    if (!tdElement) return; // Click outside `<td>`, not interested.
 
     // Make a move by the current player.
     const player = playerList.getNext();
-    const report = memoryTable.makeMove(player.name, elementTD.cellIndex, elementTD.parentElement.rowIndex);
+    const report = memoryTable.makeMove(player.name, tdElement.cellIndex, tdElement.parentElement.rowIndex);
 
     // Apply visual state.
     if (!report.moveIsCorrect) {
@@ -50,7 +50,7 @@
       playerList.revert();
       return;
     }
-    PlayingField.markCell(elementTD, player.color);
+    PlayingField.markCell(tdElement, player.color);
 
     if (report.hasWinner) {
       const again = confirm(`Player “${report.winnerName}” has won! Would you like to start again?`);
