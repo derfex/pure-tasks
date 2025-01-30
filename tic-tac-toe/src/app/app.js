@@ -4,7 +4,7 @@
   // # Modules: `import` emulation
   const {
     MemoryTable: { MemoryTable },
-    PlayerList,
+    PlayerList: { PlayerList },
     PlayingField,
   } = window.module;
 
