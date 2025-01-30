@@ -5,8 +5,8 @@
 ```typescript
 declare class MemoryTable {
   constructor(size: number, players: readonly string[]);
-    
-  makeMove(playerName: string, x: number, y: number): MemoryTableReport;
+
+  public makeMove(playerName: string, x: number, y: number): MemoryTableReport;
 }
 
 declare type MemoryTableReport =
@@ -24,6 +24,14 @@ declare type MemoryTableReport =
       readonly hasWinner: false;
       readonly moveIsCorrect: true;
     };
+
+
+declare class PlayerList<P> {
+  constructor(players: readonly P[]);
+
+  public getNext(): P;
+  public revert(): void;
+}
 ```
 
 ## Required web technologies
