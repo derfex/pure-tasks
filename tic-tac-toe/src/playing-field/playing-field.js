@@ -3,7 +3,7 @@
 
   window.module.PlayingField = (() => {
     /**
-     * Набор функций для создания игрового поля.
+     * A set of functions for creating a playing field.
      */
     const PlayingField = Object.create(null);
 
@@ -17,8 +17,8 @@
     };
 
     /**
-     * Создать игровое поле в виде пустой таблицы.
-     * @param {number} size — размер таблицы (количество ячеек по горизонтали и вертикали).
+     * Create a game field in the form of an empty table.
+     * @param {number} size — the size of the table (number of cells horizontally and vertically).
      * @returns {HTMLTableElement}
      */
     PlayingField.createTable = size => {
@@ -31,9 +31,10 @@
     };
 
     /**
-     * Отметить ячейку игрового поля.
-     * @param {HTMLTableCellElement} cellElement — указатель на DOM-element.
-     * @param {string} color — цвет фона.
+     * Mark a cell of the game field.
+     * @param {HTMLTableCellElement} cellElement — pointer to DOM-element.
+     * @param {string} color — background color.
+     * @returns {void}
      */
     PlayingField.markCell = (cellElement, color) => {
       cellElement.style.backgroundColor = color;

@@ -3,6 +3,12 @@
 ## Declaration
 
 ```typescript
+declare function createTable(size: number): HTMLTableElement;
+
+declare function markCell(cellElement: HTMLTableCellElement, color: string): void;
+```
+
+```typescript
 declare class MemoryTable {
   constructor(size: number, players: readonly string[]);
 
@@ -24,18 +30,15 @@ declare type MemoryTableReport =
       readonly hasWinner: false;
       readonly moveIsCorrect: true;
     };
+```
 
-
+```typescript
 declare class PlayerList<P> {
   constructor(players: readonly P[]);
 
   public getNext(): P;
   public revert(): void;
 }
-
-declare function createTable(size: number): HTMLTableElement;
-
-declare function markCell(cellElement: HTMLTableCellElement, color: string): void;
 ```
 
 ## Required web technologies
