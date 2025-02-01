@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Крестики-нолики</title>
-    <link rel="stylesheet" href="resource/App/App.css">
-    <link rel="stylesheet" href="resource/PlayingField/PlayingField.css">
-    <script>
-        window.module = Object.create(null);
-    </script>
+  <meta charset="UTF-8">
+  <title>Tic-Tac-Toe</title>
+  <link href="src/app/app.css" rel="stylesheet">
+  <link href="src/playing-field/playing-field.css" rel="stylesheet">
+  <script>
+    window.module = Object.create(null);
+  </script>
+  <script defer src="src/memory-table/memory-table.js"></script>
+  <script defer src="src/player-list/player-list.js"></script>
+  <script defer src="src/playing-field/playing-field.js"></script>
+  <script defer src="src/app/app.js"></script>
 </head>
 <body>
-<h1>Крестики-нолики</h1>
-<div id="js-app__table-box"></div>
-<button id="js-app__start-again">Начать заново</button>
-<div class="scripts">
-    <script src="resource/MemoryTable/MemoryTable.js"></script>
-    <script src="resource/PlayerList/PlayerList.js"></script>
-    <script src="resource/PlayingField/PlayingField.js"></script>
-    <script src="resource/app.js"></script>
-</div>
+<main class="app-main">
+  <h1 class="app-title">Tic-Tac-Toe</h1>
+  <div id="js-app__table-box"></div>
+  <button id="js-app__start-again">Start again</button>
+</main>
 </body>
 </html>

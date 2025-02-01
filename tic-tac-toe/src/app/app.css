@@ -1,0 +1,26 @@
+html {
+  background: #333;
+}
+
+body {
+  display: table;
+  padding: 16px;
+}
+
+.app-main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.app-title {
+  margin: 0;
+  font-family: sans-serif;
+  color: #ccc;
+}
+
+#js-app__start-again {
+  padding: 5px;
+  width: 100%;
+}
