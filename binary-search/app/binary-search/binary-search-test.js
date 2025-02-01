@@ -1,9 +1,8 @@
-(function () {
+(() => {
   'use strict';
 
   // # Modules: `import` emulation
   const { BinarySearch } = window.module.Search;
-
 
   // # Configuration
   const testCases = [
@@ -77,7 +76,6 @@
       result: -1,
     },
   ];
-
 
   // # Run the tests
   let failedTestsCount = 0;

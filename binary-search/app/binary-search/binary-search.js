@@ -7,7 +7,7 @@
        * Find the index of the element `needle` with the desired value in the array using the binary search method.
        * The array `haystack` must contain a set of decimal numbers sorted in ascending order.
        * @param {readonly number[]} haystack — target array.
-       * @param {number} needle — required value.
+       * @param {number} needle — desired value.
        * @returns {number} — index of the element with the desired value in the target array.
        */
       static findIndex(haystack, needle) {
