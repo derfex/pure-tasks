@@ -51,3 +51,15 @@
   width: 100%;
   transform: rotate(21deg);
 }
+
+.app-scene-1__bacteria-3-container {
+  position: absolute;
+  width: 200px;
+  top: 40px;
+  right: 90px;
+}
+
+.app-scene-1__bacteria-3 {
+  width: 100%;
+  transform: rotate(-21deg) scale(-1, 1);
+}
