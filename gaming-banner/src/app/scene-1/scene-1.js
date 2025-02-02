@@ -9,6 +9,7 @@
         const element = document.createElement('section');
         element.classList.add('app-scene');
         element.appendChild(this.#createBackgroundElement());
+        element.appendChild(this.#createBacteriaGroupElement());
         return element;
       }
 
@@ -23,6 +24,19 @@
       #createBackgroundElement() {
         const element = document.createElement('div');
         element.classList.add('app-scene-1__bg');
+        return element;
+      }
+
+      #createBacteriaGroupElement() {
+        const element = document.createElement('div');
+        element.classList.add('app-scene-1__bacteria-group-container');
+        const imagesPath = 'src/assets/images'
+        element.innerHTML = `
+        <div class="app-scene-1__bacteria-1-container">
+          <img class="app-scene-1__bacteria-1" alt="bacteria 1" src="${imagesPath}/bacteria-1.webp">
+        </div>
+      `;
+
         return element;
       }
     }

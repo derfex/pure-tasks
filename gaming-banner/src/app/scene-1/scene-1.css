@@ -19,3 +19,23 @@
   inset: 0;
   background-image: linear-gradient(90deg, #006822 0%, rgba(0, 104, 34, 0) 100%);
 }
+
+.app-scene-1__bacteria-group-container {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 540px;
+}
+
+.app-scene-1__bacteria-1-container {
+  position: absolute;
+  overflow: hidden;
+  width: 200px;
+  height: 150px;
+  top: 382px;
+  right: 100px;
+}
+
+.app-scene-1__bacteria-1 {
+  width: 100%;
+  transform: rotate(23deg);
+}
