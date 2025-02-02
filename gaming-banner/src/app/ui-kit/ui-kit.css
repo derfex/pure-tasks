@@ -1,0 +1,23 @@
+body {
+  font-family: sans-serif;
+  color: white;
+}
+
+.app-button {
+  border-radius: 20px;
+  border: none;
+  padding: 39px 135px;
+  width: 535px;
+  height: 150px;
+  background: #D21A23;
+  font-size: 55px;
+  font-weight: 700;
+  line-height: 71px;
+  color: white;
+}
+
+.app-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
