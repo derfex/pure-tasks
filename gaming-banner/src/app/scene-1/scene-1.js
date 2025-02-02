@@ -35,6 +35,9 @@
         <div class="app-scene-1__bacteria-1-container">
           <img class="app-scene-1__bacteria-1" alt="bacteria 1" src="${imagesPath}/bacteria-1.webp">
         </div>
+        <div class="app-scene-1__bacteria-2-container">
+          <img class="app-scene-1__bacteria-2" alt="bacteria 2" src="${imagesPath}/bacteria-2.webp">
+        </div>
       `;
 
         return element;
