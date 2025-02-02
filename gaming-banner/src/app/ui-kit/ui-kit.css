@@ -1,0 +1,30 @@
+:root {
+  --banner-max-width: 1440px;
+}
+
+body {
+  font-family: sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+.app-button {
+  border-radius: 20px;
+  border: none;
+  padding: 39px 135px;
+  width: 535px;
+  height: 150px;
+  font-size: 55px;
+  font-weight: 700;
+  line-height: 71px;
+  background: #d21a23;
+  color: white;
+  cursor: pointer;
+}
+
+.app-scene {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
