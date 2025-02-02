@@ -10,6 +10,7 @@
         element.classList.add('app-scene');
         element.appendChild(this.#createBackgroundElement());
         element.appendChild(this.#createBacteriaGroupElement());
+        element.appendChild(this.#createDescriptionAndButtonContainerElement());
         return element;
       }
 
@@ -42,6 +43,36 @@
           <img class="app-scene-1__bacteria-3" alt="bacteria 3" src="${imagesPath}/bacteria-3.webp">
         </div>
       `;
+
+        return element;
+      }
+
+      #createButtonElement() {
+        const element = document.createElement('button');
+        element.classList.add('app-button');
+        element.innerText = `ИГРАТЬ`;
+        return element;
+      }
+
+      #createDescriptionAndButtonContainerElement() {
+        const element = document.createElement('div');
+        element.classList.add('app-scene-1__description-and-button-container');
+
+        const descriptionElement = document.createElement('div');
+        descriptionElement.classList.add('app-scene-1__description');
+        descriptionElement.innerHTML = `
+          <div class="app-scene-1__text-1">
+            СКОЛЬКО ГРЯЗИ<br>
+            И БАКТЕРИЙ СМОЖЕТ<br>
+            УДАЛИТЬ НОВАЯ<br>
+            <span class="app-scene-1__badge">КРЕМ-ПЕНА?</span>
+          </div>
+          <div class="app-scene-1__text-2">Сыграй в игру,<br>чтобы очистить дом</div>
+        `;
+        element.appendChild(descriptionElement);
+
+        const buttonElement = this.#createButtonElement();
+        element.appendChild(buttonElement);
 
         return element;
       }
