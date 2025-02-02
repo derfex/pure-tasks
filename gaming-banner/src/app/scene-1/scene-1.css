@@ -1,0 +1,21 @@
+.app-scene-1__bg {
+  height: 100%;
+}
+
+.app-scene-1__bg::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: var(--banner-max-width);
+  background-image: url(../../assets/images/bg-dirty.webp);
+  background-position: -600px 0;
+  background-repeat: no-repeat;
+  background-size: auto 1500px;
+}
+
+.app-scene-1__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(90deg, #006822 0%, rgba(0, 104, 34, 0) 100%);
+}
