@@ -3,6 +3,7 @@
 
   window.module.Scene1 = (() => {
     class Scene1 {
+      #playButtonDestroyFunction = () => {};
       #element = this.#createElement();
 
       #createElement() {
@@ -15,7 +16,8 @@
       }
 
       destroy() {
-        // TODO: Implement.
+        this.#playButtonDestroyFunction();
+        this.#element.innerHTML = '';
       }
 
       get element() {
@@ -47,13 +49,6 @@
         return element;
       }
 
-      #createButtonElement() {
-        const element = document.createElement('button');
-        element.classList.add('app-button');
-        element.innerText = `ИГРАТЬ`;
-        return element;
-      }
-
       #createDescriptionAndButtonContainerElement() {
         const element = document.createElement('div');
         element.classList.add('app-scene-1__description-and-button-container');
@@ -71,10 +66,29 @@
         `;
         element.appendChild(descriptionElement);
 
-        const buttonElement = this.#createButtonElement();
+        const buttonElement = this.#createPlayButtonElement();
         element.appendChild(buttonElement);
 
         return element;
+      }
+
+      #createPlayButtonElement() {
+        const element = document.createElement('button');
+        element.classList.add('app-button');
+        element.innerText = `ИГРАТЬ`;
+
+        const playButtonClickEventListener = this.#dispatchPlayButtonClickEvent.bind(this);
+        this.#playButtonDestroyFunction = () => {
+          element.removeEventListener('click', playButtonClickEventListener);
+        };
+        element.addEventListener('click', playButtonClickEventListener);
+
+        return element;
+      }
+
+      #dispatchPlayButtonClickEvent() {
+        const playButtonClickEvent = new CustomEvent('playButtonClick');
+        this.#element.dispatchEvent(playButtonClickEvent);
       }
     }
 
