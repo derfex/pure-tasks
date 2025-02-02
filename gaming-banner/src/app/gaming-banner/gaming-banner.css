@@ -1,0 +1,8 @@
+.app-gaming-banner__main {
+  position: relative;
+}
+
+.app-gaming-banner__content-container {
+  position: absolute;
+  transform-origin: left top;
+}
